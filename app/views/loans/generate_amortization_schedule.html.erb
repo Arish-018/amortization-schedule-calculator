@@ -1,0 +1,56 @@
+<div class="card card-sm card-outline-secondary">
+  <div class="card-header bg-dark text-center text-white">
+    Loan Details
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+     <div class="col-sm-4">
+      <label class="font-weight-bold">
+        Loan Amount:
+      </label>&nbsp;&nbsp; $ <%= @loan.amount %><br>
+      <label class="font-weight-bold">
+        Term:
+      </label>&nbsp;&nbsp;<%= @loan.term %><br>
+      <label class="font-weight-bold">
+        Interest rate:
+      </label>&nbsp;&nbsp;<%= @loan.interest_rate %><br>
+      <label class="font-weight-bold">
+        Requested date:
+      </label>&nbsp;&nbsp;<%= @loan.request_date.strftime("%d %b %Y") %>
+    </div>
+
+    <div class="col-sm-8">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Start Balance</th>
+              <th>Principal Amount</th>
+              <th>Interest %</th>
+              <th>Total Pmt</th>
+              <th>End Balance</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @amortization_schedule.each do |entry| %>
+              <tr>
+                <td><%= entry[:due_date].strftime("%d %b %Y") %></td>
+                <td>$<%= entry[:beginning_balance].round(2) %></td>
+                <td>$<%= entry[:monthly_payment].round(2) %></td>
+                <td><%= entry[:interest_component].round(2) %></td>
+                <td><%= entry[:principal_component].round(2) %></td>
+                <td>$<%= entry[:ending_balance].round(2) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+      </div>
+    </div>
+
+  </div>
+</div>

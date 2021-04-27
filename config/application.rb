@@ -36,6 +36,7 @@ module AmortizationScheduleCalculator
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
+    config.autoload_paths += %W(#{config.root}/lib)
     config.generators.system_tests = nil
   end
 end
